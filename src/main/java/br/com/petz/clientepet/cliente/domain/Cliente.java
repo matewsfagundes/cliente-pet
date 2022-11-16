@@ -4,7 +4,10 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -21,8 +24,10 @@ import lombok.NoArgsConstructor;
 @Entity
 public class Cliente {
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id", updatable = false, unique = true, nullable = false)
 	private UUID idCliente;
-	@NotBlank	
+	@NotBlank
 	private String nomeCompleto;
 	@NotBlank
 	@Email
@@ -37,14 +42,13 @@ public class Cliente {
 	private String cpf;
 	@NotNull
 	private boolean aceitaTermos;
-	
+
 	private LocalDateTime dataHoraDoCadastro;
 	private LocalDateTime dataHoraUltimaAlteracao;
-	
+
 	public Cliente(@NotBlank String nomeCompleto, @NotBlank @Email String email, @NotBlank String celular,
 			String telefone, Sexo sexo, @NotNull LocalDate dataNascimento, @CPF String cpf,
 			@NotNull boolean aceitaTermos) {
-		this.idCliente = UUID.randomUUID();
 		this.nomeCompleto = nomeCompleto;
 		this.email = email;
 		this.celular = celular;
@@ -56,6 +60,4 @@ public class Cliente {
 		this.dataHoraDoCadastro = LocalDateTime.now();
 	}
 
-	
 }
-
