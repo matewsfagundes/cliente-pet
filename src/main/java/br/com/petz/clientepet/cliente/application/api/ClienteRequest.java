@@ -13,7 +13,7 @@ import lombok.Value;
 @Value
 public class ClienteRequest {
 	   @NotBlank
-		private String momeCompleto;
+		private String nomeCompleto;
 	    @NotBlank
 	    @Email
 		private String email;
