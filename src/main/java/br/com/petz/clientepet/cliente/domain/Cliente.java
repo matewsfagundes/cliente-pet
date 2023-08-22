@@ -28,7 +28,7 @@ public class Cliente {
 	@Column(name = "id", updatable = false, unique = true, nullable = false)
 	private UUID idCliente;
     @NotBlank
-	private String momeCompleto;
+	private String nomeCompleto;
     @NotBlank
     @Email
 	private String email;
@@ -47,16 +47,14 @@ public class Cliente {
 	private LocalDateTime dataHoraDaUltimaAlteracao;
 	
 	public Cliente(ClienteRequest clienteRequest) {
-		this.momeCompleto = clienteRequest.getNomeCompleto();
+		this.nomeCompleto = clienteRequest.getNomeCompleto();
 		this.email = clienteRequest.getEmail();
 		this.celular = clienteRequest.getCelular();
 		this.telefone = clienteRequest.getTelefone();
 		this.sexo = clienteRequest.getSexo();
 		this.dataNascimento = clienteRequest.getDataNascimento();
-		this.cpf = clienteRequest.getCelular();
+		this.cpf = clienteRequest.getCpf();
 		this.acteitaTermos = clienteRequest.getAceitaTermos();
 		this.dataHoraDoCadastro = LocalDateTime.now();
 	}
-	
-	
 }
