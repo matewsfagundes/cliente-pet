@@ -23,15 +23,14 @@ public class ClienteApplicationService implements ClienteService {
 		log.info("[inicia] ClienteApplicationService - criaCliente");
 		Cliente cliente = clienteRepository.salva(new Cliente(clienteRequest));
 		log.info("[finaliza] ClienteApplicationService - criaCliente");
-		return ClienteResponse.builder()
-				.idCliente(cliente.getIdCliente())
-						.build();
+		return ClienteResponse.builder().idCliente(cliente.getIdCliente()).build();
 	}
 
 	@Override
 	public List<ClienteListResponse> buscaTodosClientes() {
 		log.info("[inicia] ClienteApplicationService - buscaTodosClientes");
+		List<Cliente> clientes = clienteRepository.buscaTodosClientes();
 		log.info("[finaliza] ClienteApplicationService - buscaTodosClientes");
-		return null;
+		return ClienteListResponse.converte(clientes);
 	}
 }
