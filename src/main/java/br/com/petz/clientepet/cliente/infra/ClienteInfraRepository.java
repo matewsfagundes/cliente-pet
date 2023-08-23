@@ -24,7 +24,8 @@ public class ClienteInfraRepository implements ClienteRepository {
 	@Override
 	public List<Cliente> buscaTodosClientes() {
 		log.info("[inicia] ClienteInfraRepository - buscaTodosClientes");
-		log.info("[finaliza] ClienteInfraRepository - buscaTodosClientes");
-		return null;
+		List<Cliente>todosClientes = clienteSpringJPARepository.findAll()
+;		log.info("[finaliza] ClienteInfraRepository - buscaTodosClientes");
+		return todosClientes;
 	}
 }
