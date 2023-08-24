@@ -27,5 +27,5 @@ public interface ClienteAPI {
 	
 	@GetMapping(value = "/{idCliente}")
     @ResponseStatus(code = HttpStatus.OK)
-	List<ClienteDetalhadoResponse> getClienteAtravesId(@PathVariable UUID idCliente);
+	ClienteDetalhadoResponse getClienteAtravesId(@PathVariable UUID idCliente);
 }
