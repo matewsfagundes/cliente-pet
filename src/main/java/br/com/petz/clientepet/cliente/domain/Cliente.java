@@ -6,6 +6,7 @@ import java.util.UUID;
 
 import org.hibernate.validator.constraints.br.CPF;
 
+import br.com.petz.clientepet.cliente.application.api.ClienteAlteracaoRequest;
 import br.com.petz.clientepet.cliente.application.api.ClienteRequest;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -24,30 +25,30 @@ import lombok.NoArgsConstructor;
 @Entity
 public class Cliente {
 	@Id
-	@GeneratedValue(strategy =  GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(columnDefinition = "uuid", name = "idCliente", updatable = false, unique = true, nullable = false)
 	private UUID idCliente;
-    @NotBlank
+	@NotBlank
 	private String nomeCompleto;
-    @NotBlank
-    @Email
-    @Column(unique =  true)
+	@NotBlank
+	@Email
+	@Column(unique = true)
 	private String email;
-    @NotBlank
+	@NotBlank
 	private String celular;
 	private String telefone;
 	private Sexo sexo;
 	@NotNull
 	private LocalDate dataNascimento;
 	@CPF
-	@Column(unique =  true)
+	@Column(unique = true)
 	private String cpf;
 	@NotNull
 	private Boolean acteitaTermos;
-	
+
 	private LocalDateTime dataHoraDoCadastro;
 	private LocalDateTime dataHoraDaUltimaAlteracao;
-	
+
 	public Cliente(ClienteRequest clienteRequest) {
 		this.nomeCompleto = clienteRequest.getNomeCompleto();
 		this.email = clienteRequest.getEmail();
@@ -58,5 +59,16 @@ public class Cliente {
 		this.cpf = clienteRequest.getCpf();
 		this.acteitaTermos = clienteRequest.getAceitaTermos();
 		this.dataHoraDoCadastro = LocalDateTime.now();
+	}
+
+	public void altera(ClienteAlteracaoRequest clienteRequest) {
+		this.nomeCompleto = clienteRequest.getNomeCompleto();
+		this.celular = clienteRequest.getCelular();
+		this.telefone = clienteRequest.getTelefone();
+		this.sexo = clienteRequest.getSexo();
+		this.dataNascimento = clienteRequest.getDataNascimento();
+		this.acteitaTermos = clienteRequest.getAceitaTermos();
+		this.dataHoraDaUltimaAlteracao = LocalDateTime.now();
+
 	}
 }
